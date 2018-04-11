@@ -1,5 +1,4 @@
 const express = require('express')
-const assert = require('assert')
 const ldap = require('ldapjs')
 
 const app = express()
@@ -9,18 +8,30 @@ const client = ldap.createClient({
 })
 
 const opts = {
-  filter: '(&(ou=Land and Food Systems, Faculty of)(title=Staff))',
-  scope: 'sub'
+  filter: '(ou=Land and Food Systems, Faculty of)',
+  scope: 'sub',
+  attributes: ['cn', 'sn', 'mail', 'title', 'telephoneNumber', 'givenName']
 }
 
 const search = new Promise((resolve, reject) => {
   client.search('ou=people,o=ubc.ca', opts, (err, res) => {
     if (err) reject(err)
-    res.on('searchEntry', (entry) => {
-      const result = JSON.stringify(entry.object)
-      resolve(result)
+    const results = []
+    res.on('searchEntry', entry => {
+      const result = entry.object
+      console.log(result)
+      results.push(result)
+    })
+    res.on('end', (result) => {
+      resolve(results)
     })
   })
+})
+
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  next()
 })
 
 app.get('/', (req, res) => {
