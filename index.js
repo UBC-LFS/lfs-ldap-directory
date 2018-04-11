@@ -21,7 +21,7 @@ const search = new Promise((resolve, reject) => {
       const result = entry.object
       results.push(result)
     })
-    res.on('end', (result) => {
+    res.on('end', result => {
       resolve(results)
     })
   })
