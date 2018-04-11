@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function ($) {
   xhr.onreadystatechange = function () {
     if (this.readyState === 4 && this.status === 200) {
       const staffList = JSON.parse(xhr.responseText)
-      console.log(staffList.filter(x => x.givenName === 'Azin'))
       generateTable(staffList)
     }
   }

@@ -19,7 +19,6 @@ const search = new Promise((resolve, reject) => {
     const results = []
     res.on('searchEntry', entry => {
       const result = entry.object
-      console.log(result)
       results.push(result)
     })
     res.on('end', (result) => {
