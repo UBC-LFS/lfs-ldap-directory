@@ -36,10 +36,11 @@ document.addEventListener('DOMContentLoaded', function ($) {
   xhr.onreadystatechange = function () {
     if (this.readyState === 4 && this.status === 200) {
       const staffList = JSON.parse(xhr.responseText)
+      console.log(staffList)
       generateTable(staffList)
     }
   }
 
-  xhr.open('GET', 'http://localhost:3000/', true)
+  xhr.open('GET', 'http://localhost:10080/', true)
   xhr.send()
 })
