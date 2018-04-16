@@ -4,7 +4,7 @@ const generateTable = (staffList) => {
   const cleanStaffList = staffList.map(staff => ({
     firstName: staff.givenName,
     lastName: staff.sn,
-    phone: staff.telephoneNumber,
+    phone: Array.isArray(staff.telephoneNumber) ? staff.telephoneNumber[0] : staff.telephoneNumber,
     email: staff.mail,
     title: staff.title
   }))
