@@ -43,6 +43,6 @@ jQuery(document).ready(function ($) {
     }
   }
 
-  xhr.open('GET', 'http://localhost:10080/', true)
+  xhr.open('GET', 'http://prod-lc01-pub.landfood.ubc.ca/lfsdir', true)
   xhr.send()
 })

@@ -33,7 +33,7 @@ app.use(function (req, res, next) {
   next()
 })
 
-app.get('/', (req, res) => {
+app.get('/lfsdir', (req, res) => {
   search.then(result => res.send(result))
 })
 
