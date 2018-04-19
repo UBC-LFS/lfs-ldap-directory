@@ -1,7 +1,7 @@
 /* global XMLHttpRequest, jQuery */
 
 jQuery(document).ready(function ($) {
-  const generateTable = (staffList) => {
+  const generateTable = staffList => {
     const cleanStaffList = staffList.map(staff => ({
       firstName: staff.givenName,
       lastName: staff.sn,
@@ -10,16 +10,17 @@ jQuery(document).ready(function ($) {
       office: Array.isArray(staff.l) ? staff.l[0] : staff.l,
       title: staff.title
     }))
-    const dataForTable = cleanStaffList.map(staff => (
-      [
+    const dataForTable = cleanStaffList.map(staff => {
+      const email = staff => `<a href='mailto:${staff.email}'>${staff.email}</a>`
+      return [
         staff.lastName,
         staff.firstName,
         staff.title,
-        staff.email,
+        email(staff),
         staff.office,
         staff.phone
       ]
-    ))
+    })
     $('#staffList').DataTable({
       data: dataForTable,
       columns: [
