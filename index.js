@@ -28,7 +28,7 @@ const search = new Promise((resolve, reject) => {
 })
 
 app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'http://lfs-ps.sites.olt.ubc.ca/')
+  res.header('Access-Control-Allow-Origin', 'http://lfs-ps.sites.olt.ubc.ca')
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
   next()
 })
