@@ -6,6 +6,7 @@ const generateTable = (staffList) => {
     lastName: staff.sn,
     phone: Array.isArray(staff.telephoneNumber) ? staff.telephoneNumber[0] : staff.telephoneNumber,
     email: staff.mail,
+    office: Array.isArray(staff.l) ? staff.l[0] : staff.l,
     title: staff.title
   }))
   const dataForTable = cleanStaffList.map(staff => (
@@ -14,6 +15,7 @@ const generateTable = (staffList) => {
       staff.firstName,
       staff.title,
       staff.email,
+      staff.office,
       staff.phone
     ]
   ))
@@ -24,6 +26,7 @@ const generateTable = (staffList) => {
       { title: 'First Name', 'defaultContent': '' },
       { title: 'Title', 'defaultContent': '' },
       { title: 'Email', 'defaultContent': '' },
+      { title: 'Office', 'defaultContent': '' },
       { title: 'Phone', 'defaultContent': '' }
     ],
     'pageLength': 100

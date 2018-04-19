@@ -10,7 +10,7 @@ const client = ldap.createClient({
 const opts = {
   filter: '(ou=Land and Food Systems, Faculty of)',
   scope: 'sub',
-  attributes: ['cn', 'sn', 'mail', 'title', 'telephoneNumber', 'givenName']
+  attributes: ['cn', 'sn', 'mail', 'title', 'telephoneNumber', 'givenName', 'l']
 }
 
 const search = new Promise((resolve, reject) => {
@@ -28,7 +28,7 @@ const search = new Promise((resolve, reject) => {
 })
 
 app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Origin', 'http://lfs-ps.sites.olt.ubc.ca/')
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
   next()
 })
