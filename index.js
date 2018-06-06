@@ -4,9 +4,9 @@ const cors = require('cors')
 
 const app = express()
 
-const corsOptions = {
-  origin: 'http://lfs-ps.sites.olt.ubc.ca'
-}
+app.use(cors({
+  origin: 'http://www.landfood.ubc.ca'
+}))
 
 const client = ldap.createClient({
   url: 'ldap://ldap.ubc.ca',
@@ -14,7 +14,7 @@ const client = ldap.createClient({
 })
 
 const opts = {
-  filter: '(ou=Land and Food Systems, Faculty of)',
+  filter: '(&(ou=Land and Food Systems, Faculty of)(|(title=Faculty)(title=Staff)))',
   scope: 'sub',
   attributes: ['cn', 'sn', 'mail', 'title', 'telephoneNumber', 'givenName', 'l']
 }
@@ -33,7 +33,14 @@ const search = new Promise((resolve, reject) => {
   })
 })
 
-app.get('/lfsdir', cors(corsOptions), (req, res) => {
+const nocache = (req, res, next) => {
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate')
+  res.header('Expires', '-1')
+  res.header('Pragma', 'no-cache')
+  next()
+}
+
+app.get('/lfsdir', nocache, (req, res) => {
   search.then(result => res.send(result))
 })
 
