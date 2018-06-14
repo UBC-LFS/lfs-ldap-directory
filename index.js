@@ -19,7 +19,7 @@ const opts = {
   attributes: ['cn', 'sn', 'mail', 'title', 'telephoneNumber', 'givenName', 'l']
 }
 
-const search = new Promise((resolve, reject) => {
+const search = () => new Promise((resolve, reject) => {
   client.search('ou=people,o=ubc.ca', opts, (err, res) => {
     if (err) reject(err)
     const results = []
@@ -41,7 +41,7 @@ const nocache = (req, res, next) => {
 }
 
 app.get('/lfsdir', nocache, (req, res) => {
-  search.then(result => res.send(result))
+  search().then(result => res.send(result))
 })
 
 app.listen(10080, () => console.log('App listening on port 10080!'))
