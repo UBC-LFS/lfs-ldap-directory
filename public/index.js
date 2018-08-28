@@ -36,6 +36,6 @@ jQuery(document).ready(function ($) {
     }
   };
 
-  xhr.open('GET', 'http://prod-lc01-pub.landfood.ubc.ca/lfsdir', true);
+  xhr.open('GET', 'https://prod-lc01-pub.landfood.ubc.ca/lfsdir', true);
   xhr.send();
 });
