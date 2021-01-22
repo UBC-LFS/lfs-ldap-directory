@@ -10,7 +10,7 @@ app.use(cors({
 
 const client = ldap.createClient({
   url: 'ldap://ldap.ubc.ca',
-  optionsSuccessStatus: 200
+  reconnect: true
 })
 
 const opts = {
@@ -26,6 +26,10 @@ const search = () => new Promise((resolve, reject) => {
     res.on('searchEntry', entry => {
       const result = entry.object
       results.push(result)
+    })
+    res.on('error', err => {
+      console.error('LDAP connection error: ', err);
+      resolve([])
     })
     res.on('end', result => {
       resolve(results)
