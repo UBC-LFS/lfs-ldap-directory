@@ -44,7 +44,7 @@ const nocache = (req, res, next) => {
   next()
 }
 
-app.get('/lfsdir', nocache, (req, res) => {
+app.get('/', nocache, (req, res) => {
   search().then(result => res.send(result))
 })
 
