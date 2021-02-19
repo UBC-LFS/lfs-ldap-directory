@@ -5,7 +5,7 @@ const cors = require('cors')
 const app = express()
 
 app.use(cors({
-  origin: 'http://www.landfood.ubc.ca'
+  origin: 'https://www.landfood.ubc.ca'
 }))
 
 const client = ldap.createClient({
