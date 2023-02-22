@@ -9,7 +9,7 @@ app.use(cors({
 }))
 
 const client = ldap.createClient({
-  url: 'ldap://ldap.ubc.ca',
+  url: 'ldap://ldapcons.id.ubc.ca',
   reconnect: true
 })
 
